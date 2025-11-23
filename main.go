@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"os"
 	"translate-shell-service/bootstrap"
+	"translate-shell-service/storage"
 	"translate-shell-service/util"
 
 	"github.com/gin-gonic/gin"
@@ -19,6 +20,8 @@ func testResponse(c *gin.Context) {
 func init() {
 	os.Mkdir("/log", os.ModePerm)
 	util.SetLog("/log/gin.log")
+	storage.SetSqlite()
+	new(storage.Cache).Sync()
 }
 func main() {
 	// gin服务

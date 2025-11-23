@@ -8,3 +8,4 @@ services:
     container_name: gin
     volumes:
       - ./log:/log
+      - ./data:/data
