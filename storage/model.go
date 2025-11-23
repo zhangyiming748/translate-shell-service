@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"errors"
 	"log"
 	"time"
 
@@ -32,10 +33,16 @@ func (c *Cache) Create() error {
 	return result.Error
 }
 
-// GetByID 根据 ID 获取 Example 记录
-func (c *Cache) GetBySrc(id int64) error {
-	result := GetSqlite().First(&c, id)
-	return result.Error
+// GetBySrc根据 Src 获取记录 写回到c
+func (c *Cache) GetBySrc(src string) (bool, error) {
+	result := GetSqlite().Where("src = ?", src).First(&c)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return false, nil
+		}
+		return false, result.Error
+	}
+	return true, nil
 }
 
 // Update 更新 Example 记录
