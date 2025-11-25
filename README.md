@@ -60,7 +60,7 @@ POST /translate
 ```json
 {
   "src": "hello",
-  "proxy": "http://127.0.0.1:8889"
+  "keyword": "Alohomora"
 }
 ```
 
@@ -71,6 +71,7 @@ POST /translate
 |body|body|object| 否 |none|
 |» src|body|string| 是 |原文|
 |» proxy|body|string| 否 |代理地址|
+|» keyword|body|string| 否 |关键词|
 
 > 返回示例
 
@@ -78,8 +79,34 @@ POST /translate
 
 ```json
 {
-  "dst": "string",
-  "msg": "string"
+  "dst": "你好",
+  "msg": {
+    "status": "fail",
+    "message": "reserved range",
+    "continent": "",
+    "continentCode": "",
+    "country": "",
+    "countryCode": "",
+    "region": "",
+    "regionName": "",
+    "city": "",
+    "district": "",
+    "zip": "",
+    "lat": 0,
+    "lon": 0,
+    "timezone": "",
+    "offset": 0,
+    "currency": "",
+    "isp": "",
+    "org": "",
+    "as": "",
+    "asname": "",
+    "reverse": "",
+    "mobile": false,
+    "proxy": false,
+    "hosting": false,
+    "query": "127.0.0.1"
+  }
 }
 ```
 
@@ -96,4 +123,29 @@ POST /translate
 |名称|类型|必选|约束|中文名|说明|
 |---|---|---|---|---|---|
 |» dst|string|true|none||译文|
-|» msg|string|true|none||返回通过gin自带方法检测的ip|
+|» msg|object|true|none||返回通过gin自带方法检测的ip|
+|»» status|string|true|none||none|
+|»» message|string|true|none||none|
+|»» continent|string|true|none||none|
+|»» continentCode|string|true|none||none|
+|»» country|string|true|none||none|
+|»» countryCode|string|true|none||none|
+|»» region|string|true|none||none|
+|»» regionName|string|true|none||none|
+|»» city|string|true|none||none|
+|»» district|string|true|none||none|
+|»» zip|string|true|none||none|
+|»» lat|integer|true|none||none|
+|»» lon|integer|true|none||none|
+|»» timezone|string|true|none||none|
+|»» offset|integer|true|none||none|
+|»» currency|string|true|none||none|
+|»» isp|string|true|none||none|
+|»» org|string|true|none||none|
+|»» as|string|true|none||none|
+|»» asname|string|true|none||none|
+|»» reverse|string|true|none||none|
+|»» mobile|boolean|true|none||none|
+|»» proxy|boolean|true|none||none|
+|»» hosting|boolean|true|none||none|
+|»» query|string|true|none||none|

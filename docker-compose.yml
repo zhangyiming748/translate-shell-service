@@ -10,4 +10,4 @@ services:
       - ./log:/log
       - ./data:/data
     environment:
-      - abracadabra=abracadabra
+      - keyword=Alohomora # 这里设置的关键词代表每次网络请求要带的参数 参数一致才会提供翻译服务 防止服务被滥用

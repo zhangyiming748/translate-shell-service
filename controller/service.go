@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"os"
 	"translate-shell-service/geo"
 	"translate-shell-service/logic"
 
@@ -21,9 +22,9 @@ func (tsc TranslateServiceController) GetAlive(ctx *gin.Context) {
 
 // 结构体必须大写 否则找不到
 type RequestBody struct {
-	Src         string `json:"src"`                   // 原文
-	Proxy       string `json:"proxy,omitempty"`       // 本地运行时可选使用代理
-	Abracadabra string `json:"abracadabra,omitempty"` // 设置一个keyword防止服务被滥用
+	Src     string `json:"src"`               // 原文
+	Proxy   string `json:"proxy,omitempty"`   // 本地运行时可选使用代理
+	Keyword string `json:"keyword,omitempty"` // 设置一个keyword防止服务被滥用
 }
 type ResponseBody struct {
 	Dst string     `json:"dst"`           // 译文
@@ -31,6 +32,12 @@ type ResponseBody struct {
 }
 
 /*
+curl --location --request POST 'http://127.0.0.1:6381/api/v1/translate' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "src": "hello",
+    "keyword": "Alohomora"
+}'
  */
 func (tsc TranslateServiceController) PostTranslate(ctx *gin.Context) {
 	fmt.Println("get src")
@@ -40,7 +47,9 @@ func (tsc TranslateServiceController) PostTranslate(ctx *gin.Context) {
 		return
 	}
 	fmt.Printf("%+v\n", req)
-	if req.Abracadabra != "abracadabra" {
+	//os.Setenv("keyword","Alohomora")
+	key := os.Getenv("keyword")
+	if req.Keyword != key {
 		ctx.JSON(403, gin.H{"error": "unauthorized"})
 		return
 	}
