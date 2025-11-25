@@ -4,7 +4,7 @@ services:
   gin:
     image: zhangyiming748/translate-service:latest
     ports:
-      - "6380:80"
+      - "6380:6380"
     container_name: gin
     volumes:
       - ./log:/log
