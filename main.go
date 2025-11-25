@@ -20,7 +20,7 @@ func testResponse(c *gin.Context) {
 func init() {
 	os.Mkdir("/log", os.ModePerm)
 	util.SetLog("/log/gin.log")
-	storage.SetSqlite()
+	storage.SetSqlite("/data")
 	new(storage.Cache).Sync()
 }
 func main() {
@@ -29,5 +29,5 @@ func main() {
 	engine := gin.New()
 	bootstrap.InitService(engine)
 	// 启动http服务
-	engine.Run(":80")
+	engine.Run(":8082")
 }

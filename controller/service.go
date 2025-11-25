@@ -2,7 +2,6 @@ package controller
 
 import (
 	"fmt"
-	"os"
 	"translate-shell-service/geo"
 	"translate-shell-service/logic"
 
@@ -24,7 +23,7 @@ func (tsc TranslateServiceController) GetAlive(ctx *gin.Context) {
 type RequestBody struct {
 	Src   string `json:"src"` // 原文
 	Proxy string `json:"proxy,omitempty"` // 本地运行时可选使用代理
-	Abracadarbra string `json:"abracadarbra,omitempty"` // 设置一个keyword防止服务被滥用
+	Abracadabra string `json:"abracadabra,omitempty"` // 设置一个keyword防止服务被滥用
 }
 type ResponseBody struct {
 	Dst string `json:"dst"` // 译文
@@ -35,21 +34,18 @@ type ResponseBody struct {
  */
 func (tsc TranslateServiceController) PostTranslate(ctx *gin.Context) {
 	fmt.Println("get src")
-	var requestBody RequestBody
-	if err := ctx.BindJSON(&requestBody); err != nil {
+	var req RequestBody
+	if err := ctx.BindJSON(&req); err != nil {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Printf("%+v\n",requestBody)
-	if !isAuthorizedClient(){
+	fmt.Printf("%+v\n",req)
+	if req.Abracadabra!="abracadabra"{
 		ctx.JSON(403, gin.H{"error": "unauthorized"})
+		return
 	}
 	var rep ResponseBody
-	rep.Dst = logic.Trans(requestBody.Src, requestBody.Proxy)
+	rep.Dst = logic.Trans(req.Src, req.Proxy)
 	rep.Msg = geo.GetIPInfo(ctx.ClientIP())
 	ctx.JSON(200, rep)
-}
-func isAuthorizedClient()bool{
-	abracadarbra := os.Getenv("abracadabra")
-	return abracadarbra == "abracadabra"
 }

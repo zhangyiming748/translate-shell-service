@@ -4,11 +4,10 @@ services:
   gin:
     image: zhangyiming748/translate-service:latest
     ports:
-      - "8192:80"
+      - "6380:80"
     container_name: gin
     volumes:
       - ./log:/log
       - ./data:/data
     environment:
       - abracadabra=abracadabra
-      
