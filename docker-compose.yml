@@ -1,5 +1,4 @@
-version: '3.8'
-
+name: translate
 services:
   gin:
     image: zhangyiming748/translate-service:latest
