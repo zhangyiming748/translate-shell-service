@@ -9,3 +9,6 @@ services:
     volumes:
       - ./log:/log
       - ./data:/data
+    environment:
+      - abracadabra=abracadabra
+      
