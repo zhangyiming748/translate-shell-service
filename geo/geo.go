@@ -1,10 +1,12 @@
 package geo
+
 import (
 	"encoding/json"
 	"fmt"
 	"strings"
 	"translate-shell-service/util"
 )
+
 type IpInfo struct {
 	Status        string  `json:"status"`            // success or fail
 	Message       string  `json:"message,omitempty"` // included only when status is fail Can be one of the following: private range, reserved range, invalid query

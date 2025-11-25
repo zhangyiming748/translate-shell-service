@@ -11,14 +11,14 @@ import (
 
 var gormDB *gorm.DB
 
-func SetSqlite(baseDir string) {
+func SetSqlite(root string) {
 	// 创建数据目录
-	err := os.MkdirAll(baseDir, 0755)
+	err := os.MkdirAll(root, 0755)
 	if err != nil {
 		log.Fatal("无法创建数据目录:", err)
 	}
 	// 使用纯Go SQLite驱动连接数据库
-	dbFile:=filepath.Join(baseDir, "translate.db")
+	dbFile := filepath.Join(root, "translate.db")
 	db, err := gorm.Open(sqlite.Open(dbFile), &gorm.Config{})
 	if err != nil {
 		log.Fatal("无法连接到数据库:", err)

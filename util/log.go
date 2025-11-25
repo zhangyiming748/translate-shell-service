@@ -4,14 +4,17 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/zhangyiming748/lumberjack"
 )
 
-func SetLog(l string) {
+func SetLog(root string) {
+	os.Mkdir(root, os.ModePerm)
+	logFile := filepath.Join(root, "gin.log")
 	// 创建一个用于写入文件的Logger实例
 	fileLogger := &lumberjack.Logger{
-		Filename:   l,
+		Filename:   logFile,
 		MaxSize:    1, // MB
 		MaxBackups: 3,
 		MaxAge:     28, // days
