@@ -25,6 +25,7 @@ type RequestBody struct {
 }
 type ResponseBody struct {
 	Dst string `json:"dst"`
+	Msg   string `json:"msg,omitempty"`
 }
 
 /*
@@ -41,6 +42,7 @@ func (tsc TranslateServiceController) PostTranslate(ctx *gin.Context) {
 	fmt.Println(requestBody.Src, requestBody.Proxy)
 	var rep ResponseBody
 	rep.Dst = logic.Trans(requestBody.Src, requestBody.Proxy)
+	rep.msg = "success"
 	//rep.Dst = fmt.Sprintf("我已经%d年没见过%s了", requestBody.Age, requestBody.Name)
 	ctx.JSON(200, rep)
 }
