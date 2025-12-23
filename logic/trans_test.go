@@ -1,9 +1,9 @@
-package main
+package logic
 
 import (
-	"github.com/gin-gonic/gin"
 	"log"
-	"translate-shell-service/bootstrap"
+	"testing"
+	"translate-shell-service/storage"
 	"translate-shell-service/util"
 )
 
@@ -17,12 +17,10 @@ func init() {
 		baseDir = "."
 	}
 	util.SetLog(baseDir)
+	storage.SetSqlite(baseDir)
+	new(storage.Cache).Sync()
 }
-func main() {
-	// gin服务
-	gin.SetMode(gin.DebugMode)
-	engine := gin.New()
-	bootstrap.InitService(engine)
-	// 启动http服务
-	engine.Run(":6380")
+func TestTranslate(t *testing.T) {
+	dst := TransByBing("hello")
+	t.Log(dst)
 }

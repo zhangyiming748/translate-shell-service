@@ -5,28 +5,11 @@ import (
 	"os/exec"
 	"strings"
 	"time"
-	"translate-shell-service/storage"
 )
 
-func Trans(src, proxy string) (dst string) {
-	cache := new(storage.Cache)
-	cache.Src = src
-	if ok, _ := cache.GetBySrc(src); ok {
-		log.Printf("从缓存中获取:%v\n", cache.Dst)
-		return cache.Dst
-	} else {
-		log.Printf("从trans命令中获取:%v\n", cache.Dst)
-		if proxy != "" {
-			cache.Dst = TransByGoogle(src, proxy)
-		} else {
-			cache.Dst = TransByBing(src)
-		}
-	}
-	err := cache.Create()
-	if err != nil {
-		log.Fatalf("创建缓存出错:%v\n", err)
-	}
-	return cache.Dst
+func Trans(src string) (dst string) {
+	dst = TransByBing(src)
+	return dst
 }
 
 func TransByGoogle(src, proxy string) (dst string) {
@@ -62,5 +45,6 @@ func TransByBing(src string) (dst string) {
 		time.Sleep(3 * time.Second)
 		TransByBing(src)
 	}
+	log.Printf("%s执行查询命令后的译文:%s\n", src, result)
 	return result
 }
