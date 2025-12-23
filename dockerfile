@@ -10,7 +10,7 @@ FROM alpine:3.21
 COPY --from=builder /app/gin /usr/local/bin/gin
 EXPOSE 80
 RUN apk update
-RUN apk add translate-shell
+RUN apk add translate-shell curl
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#http://mirrors4.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories
 ENTRYPOINT ["/usr/local/bin/gin"]
 # docker build -t gin .
