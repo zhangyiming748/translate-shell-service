@@ -19,6 +19,12 @@ func (tsc TranslateServiceController) GetAlive(ctx *gin.Context) {
 	ctx.String(200, fmt.Sprintf("Hello, %s!", user))
 }
 
+func (tsc TranslateServiceController) GetTranslate(ctx *gin.Context) {
+	src := ctx.Query("src")
+	dst := logic.Trans(src)
+	ctx.String(200, dst)
+}
+
 // 结构体必须大写 否则找不到
 type RequestBody struct {
 	Src     string `json:"src"`               // 原文

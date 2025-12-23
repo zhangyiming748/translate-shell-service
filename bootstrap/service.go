@@ -10,6 +10,7 @@ func InitService(engine *gin.Engine) {
 	{
 		c := new(controller.TranslateServiceController)
 		routeGroup.GET("/v1/health", c.GetAlive)
+		routeGroup.GET("/v1/translate", c.GetTranslate)
 		routeGroup.POST("/v1/translate", c.PostTranslate)
 	}
 }
