@@ -4,3 +4,5 @@
 *.db
 translate-shell-service
 translate-shell-service
+nohup.out
+pid_file.txt
