@@ -8,7 +8,7 @@ RUN go build -o gin .
 
 FROM alpine:3.21
 COPY --from=builder /app/gin /usr/local/bin/gin
-EXPOSE 80
+EXPOSE 6380
 RUN apk update
 RUN apk add translate-shell curl
 RUN sed -i 's#https\?://dl-cdn.alpinelinux.org/alpine#http://mirrors4.tuna.tsinghua.edu.cn/alpine#g' /etc/apk/repositories
