@@ -3,7 +3,6 @@ package logic
 import (
 	"log"
 	"testing"
-	"translate-shell-service/storage"
 	"translate-shell-service/util"
 )
 
@@ -17,8 +16,6 @@ func init() {
 		baseDir = "."
 	}
 	util.SetLog(baseDir)
-	storage.SetSqlite(baseDir)
-	new(storage.Cache).Sync()
 }
 func TestTranslate(t *testing.T) {
 	dst := TransByBing("hello")

@@ -7,9 +7,15 @@ import (
 	"time"
 )
 
+var history map[string]string
+
 func Trans(src string) (dst string) {
-	dst = TransByBing(src)
-	return dst
+	if dst, ok := history[src]; ok {
+		return dst
+	} else {
+		history[src] = TransByBing(src)
+		return history[src]
+	}
 }
 
 func TransByGoogle(src, proxy string) (dst string) {
